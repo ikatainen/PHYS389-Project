@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import random 
 from matplotlib import animation 
  
+ 
 
 # Might be useful values
 r = 58232*pow(10, 3)            # radius of Saturn with units [m]
@@ -19,10 +20,15 @@ m_p = rho / V                   # Mass of paricles
 x = [random.uniform(1, 100) for n in range(200)]
 y = [random.uniform(1, 100) for n in range(200)]
 
-v_x
-v_y
+#dt = 282*pow(10, 6)  / 16400      # t=x/v where v is velocity [m/s] and x is the leght of saturns rings [m]
 
-# Make the data points move with correct velocity and gravity field
+#v_x = x * dt
+#v_y = 0
+
+# then do move them one point so that
+
+
+# Make the data points move with correct velocity and gravitational field
 
 class Particles():
     def __init__(self, p, v, m):
@@ -30,14 +36,20 @@ class Particles():
         self.v = v      # Velocity
         self.m = m      # Mass
 
-fig, ax = plt.subplot()
+dx = np.ones_like(x)
+dy = np.zeros_like(y)
 
-def animate(i):
-    #pt = randint(1,9) # grab a random integer to be the next y-value in the animation
-    x.append(i)
-    y.append(i)
+# Plot the points and arrows
+fig, ax = plt.subplots()
+plt.scatter(x, y, color ='red')
+plt.quiver(x, y, dx, dy, scale=20)
 
-fig = plt.scatter(x, y)
+sc = plt.scatter(x, y)
 
-#plt.scatter(x, y, color = 'red')
+for i in range(50):
+    x += [random.uniform(1, 100) for n in range(200)] * 2
+    y += [random.uniform(1, 100) for n in range(200)] * 2
+    sc.set_offsets(np.c_[x, y]) 
+    plt.pause(2)
+
 plt.show()
