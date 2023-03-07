@@ -56,10 +56,10 @@ for i in range(2):
     plt.pause(2)
 
     for j in range(2):
-        x[j] += [random.uniform(1, 100) for n in range(200)] * 2
-        j[j] += [random.uniform(1, 100) for n in range(200)] * 2
+        x_new[j] += [random.uniform(1, 100) for n in range(200)] * 2
+        y_new[j] = [random.uniform(1, 100) for n in range(200)] 
     #ax.scatter(x, y, color = 'red')
-    sc.set_offsets(np.c_[x, y]) 
+    sc.set_offsets(np.c_[x_new, y_new]) 
     plt.pause(2)
     ax.clear()
 
