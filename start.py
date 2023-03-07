@@ -17,8 +17,8 @@ V = 4/3 * math.pi * pow(r_d, 3) # Volume of particles
 m_p = rho / V                   # Mass of paricles 
 
 # Generating random particle in a plot
-x = [random.uniform(1, 100) for n in range(200)]
-y = [random.uniform(1, 100) for n in range(200)]
+x = [random.uniform(1, 100) for n in range(20)]
+y = [random.uniform(1, 100) for n in range(20)]
 
 #dt = 282*pow(10, 6)  / 16400      # t=x/v where v is velocity [m/s] and x is the leght of saturns rings [m]
 
@@ -41,15 +41,26 @@ dy = np.zeros_like(y)
 
 # Plot the points and arrows
 fig, ax = plt.subplots()
-plt.scatter(x, y, color ='red')
-plt.quiver(x, y, dx, dy, scale=20)
 
-sc = plt.scatter(x, y)
+plt.scatter(x, y, color = 'red')
+plt.quiver(x, y, dx, dy, scale =20)
 
-for i in range(50):
-    x += [random.uniform(1, 100) for n in range(200)] * 2
-    y += [random.uniform(1, 100) for n in range(200)] * 2
+for i in range(2):
+    x_new = [random.uniform(1, 100) for n in range(200)] 
+    y_new = [random.uniform(1, 100) for n in range(200)] 
+    dx_new = np.ones_like(x)
+    dy_new = np.zeros_like(y)
+
+    sc = plt.scatter(x, y, color = 'red')
+    plt.quiver(x_new, y_new, dx_new, dy_new, scale=20)
+    plt.pause(2)
+
+    for j in range(2):
+        x[j] += [random.uniform(1, 100) for n in range(200)] * 2
+        j[j] += [random.uniform(1, 100) for n in range(200)] * 2
+    #ax.scatter(x, y, color = 'red')
     sc.set_offsets(np.c_[x, y]) 
     plt.pause(2)
+    ax.clear()
 
 plt.show()
