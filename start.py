@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import random 
 from matplotlib import animation 
  
- 
 
 # Might be useful values
 r = 58232*pow(10, 3)            # radius of Saturn with units [m]
@@ -17,50 +16,39 @@ V = 4/3 * math.pi * pow(r_d, 3) # Volume of particles
 m_p = rho / V                   # Mass of paricles 
 
 # Generating random particle in a plot
-x = [random.uniform(1, 100) for n in range(20)]
-y = [random.uniform(1, 100) for n in range(20)]
+x = [random.uniform(-100, 100) for n in range(100)]
+y = [random.uniform(-100, 100) for n in range(100)]
 
-#dt = 282*pow(10, 6)  / 16400      # t=x/v where v is velocity [m/s] and x is the leght of saturns rings [m]
+# Kepler's third law
+T = math.sqrt( 4 * pow(math.pi, 2) / (G * M) * pow(r, 3))
 
-#v_x = x * dt
-#v_y = 0
+# Defining omega
+Omega = 2 * math.pi / T
 
-# then do move them one point so that
+# Velocity for x direction
+v_x = []
 
+for j in range(len(y)):
+   v =  - 2 / 3 * Omega * y[j]
+   v_x.append(v)
 
-# Make the data points move with correct velocity and gravitational field
-
-class Particles():
-    def __init__(self, p, v, m):
-        self.p = p      # Position
-        self.v = v      # Velocity
-        self.m = m      # Mass
-
+# Defining dx and dy for the arrows 
 dx = np.ones_like(x)
 dy = np.zeros_like(y)
 
 # Plot the points and arrows
 fig, ax = plt.subplots()
 
+points, = ax.plot(x, y, 'ro')
+
 plt.scatter(x, y, color = 'red')
-plt.quiver(x, y, dx, dy, scale =20)
+# Plotting the arrows
+plt.quiver(x, y, dx, dy, scale =10)
 
-for i in range(2):
-    x_new = [random.uniform(1, 100) for n in range(200)] 
-    y_new = [random.uniform(1, 100) for n in range(200)] 
-    dx_new = np.ones_like(x)
-    dy_new = np.zeros_like(y)
-
-    sc = plt.scatter(x, y, color = 'red')
-    plt.quiver(x_new, y_new, dx_new, dy_new, scale=20)
-    plt.pause(2)
-
-    for j in range(2):
-        x_new[j] += [random.uniform(1, 100) for n in range(200)] * 2
-        y_new[j] = [random.uniform(1, 100) for n in range(200)] 
-    #ax.scatter(x, y, color = 'red')
-    sc.set_offsets(np.c_[x_new, y_new]) 
-    plt.pause(2)
-    ax.clear()
+# Making the points move
+for i in range(1000):
+    x = [x[i] + v_x[i] for i in range(len(x))]
+    points.set_data(x, y)
+    plt.pause(0.01)
 
 plt.show()
