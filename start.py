@@ -60,7 +60,7 @@ dx = arrows(dx, x, y)
 plt.quiver(x, y, dx, dy, scale = 10)
 
 # Making the points move
-for i in range(10000):
+for i in range(1000):
     x = [x[i] + v_x[i] for i in range(len(x))]
     points.set_data(x, y)
     plt.pause(0.001)
