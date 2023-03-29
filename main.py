@@ -57,7 +57,6 @@ def arrows(dx, x, y):
     return dx
 
 
-
 # Plot the points and arrows
 fig, ax = plt.subplots()
 
@@ -68,8 +67,8 @@ plt.scatter(0, 0, color = 'black', s = 100)
 
 # Plotting the initail point 
 plt.scatter(x, y, color = 'red')
-plt.ylabel('Discatnce from Satrurn (km??)')
-plt.xlabel('m')
+plt.ylabel('Discatnce from Satrurn (m)')
+plt.xlabel('Distance travelled (m)')
 
 # Plotting the arrows
 dx = arrows(dx, x, y)
@@ -78,7 +77,6 @@ plt.quiver(x, y, dx, dy, scale = 10)
 # Making the points move
 for i in range(1000):
     x = [x[i] + v_x[i] for i in range(len(x))]
-    y = [y[i] + v_y[i] for i in range(len(y))]
     points.set_data(x, y)
     plt.pause(0.001)
 
