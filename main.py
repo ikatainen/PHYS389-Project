@@ -14,12 +14,12 @@ G = 6.674*pow(10, -11)          # gravitational constant with units [m^3 kg^-1 s
 rho = 1000                      # density of particle in Saturn's rings with units [kg/m^3]
 r_d = 500 * pow(10, -9)         # Average radius of particles with units [m]
 V = 4/3 * math.pi * pow(r_d, 3) # Volume of particles 
-m_p = 1e-16 #rho / V                   # Mass of paricles 
+m_p = 513                       # Mass of paricles [kg]
+x_p = 6630 *pow(10, 3)          # the distance from Saturn's core to the rings
 
 # Generating random particle in a plot
-np.random.seed(0)  # for reproducibility
 x = [random.uniform(-100, 100) for n in range(50)]
-y = [random.uniform(-100, 100) for n in range(50)]
+y = [random.uniform(-100, 100) for n in range(50)] # the limts on this one could've been changed to (x_p, x_p+100) but the code wouldn't works so it is left at (-100,100)
 
 # Kepler's third law
 T = math.sqrt(4 * pow(math.pi, 2) / (G * M) * pow(r, 3))
@@ -38,17 +38,17 @@ v_x = []
 v_y = []
 
 for j in range(len(y)):
-   vx =  - 2 / 3 * Omega *  y[j]
+   vx =  - 2 / 3 * Omega *  y[j] 
    v_x.append(vx)
    
-   vy = -g_g *0.1
+   vy = -g_g
    v_y.append(vy)
 
 # Defining dx and dy for the arrows 
 dx = np.zeros_like(x)
 dy = np.zeros_like(y)
 
-def arrows(dx, x, y):
+def arrows(dx, x, y): # setting them so that above 0 on the y-axis goes to the negative x-direction and when below 0 they go to positive x-direction
     for i in range(len(y)):
         if y[i] < 0:
             dx[i] = 1
