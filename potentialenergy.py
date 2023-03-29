@@ -9,7 +9,7 @@ M = 5.683*pow(10, 26)           # mass of Saturn with units [kg]
 g_s = 10.44                     # gravity of Saturn with units [m/s^2]
 G = 6.674*pow(10, -11)          # gravitational constant with units [m^3 kg^-1 s^-2]
 m_p = 513                       # Mass of paricles [kg]
-x_p = r+6630 * pow(10, 3)
+x_p = r+6630 * pow(10, 3)       # Distance from the core to the rings
 
 # Generating random particle in a plot
 x = [random.uniform(-100, 100) for n in range(50)]
@@ -27,11 +27,11 @@ v_x = np.array([-2/3 * Omega * (6630 * pow(10, 3) + x_i) for x_i in x])
 # Defining initial kinetic energy
 PE_0 = - G * M * m_p / r
 
-# Defining lists for kinetic energy and time
+# Defining lists for potential energy and time
 PE = [PE_0]
 time = [0]
 
-# Loop for calculating kinetic energy and time over 1 hour
+# Loop for calculating potential energy and time over 1 hour
 dt = 10
 for t in range(1, 3600, dt):
     # Update particle positions and velocities
@@ -40,11 +40,11 @@ for t in range(1, 3600, dt):
     v_x += np.zeros_like(v_x)
     time.append(t)
     
-    # Calculate kinetic energy
+    # Calculate potential energy
     PE_t = - G * M * m_p / r
     PE.append(PE_t)
     
-# Plotting a graph showing conservation of kinetic energy over time
+# Plotting a graph showing conservation of potential energy over time
 plt.figure(figsize=(6, 4))
 plt.plot(time, PE, color='purple') 
 plt.ylabel('Potential Energy (J)')
