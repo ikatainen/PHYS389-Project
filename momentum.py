@@ -13,9 +13,8 @@ rho = 1000                      # density of particle in Saturn's rings with uni
 r_d = 500 * pow(10, -9)         # Average radius of particles with units [m]
 V = 4/3 * math.pi * pow(r_d, 3) # Volume of particles 
 m_p = rho / V                   # Mass of particles 
-
+print(V)
 # Generating random particle in a plot
-np.random.seed(0)  # for reproducibility
 x = [random.uniform(-100, 100) for n in range(50)]
 y = [random.uniform(-100, 100) for n in range(50)]
 
@@ -41,7 +40,7 @@ for j in range(len(x)):
    vx =  - 2 / 3 * Omega *  y[j]
    v_x.append(vx)
    
-   vy = -g_g *0.1
+   vy = -g_g 
    v_y.append(vy)
 
 # Set the time step (just selected as 0.01 s but when changed the plot changes)
@@ -92,5 +91,5 @@ for i in range(100):
 plt.figure(figsize = (6,4))
 plt.plot(times, momentum_values, color = 'purple')
 plt.xlabel('Time (s)')
-plt.ylabel('Total momentum (N s)')
+plt.ylabel('Total momentum (Ns)')
 plt.show()
