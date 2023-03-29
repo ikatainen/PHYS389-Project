@@ -2,7 +2,6 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt 
 import random 
-from matplotlib import animation 
  
 # Useful values
 r = 58232*pow(10, 3)            # radius of Saturn with units [m]
@@ -13,7 +12,7 @@ rho = 1000                      # density of particle in Saturn's rings with uni
 r_d = 500 * pow(10, -9)         # Average radius of particles with units [m]
 V = 4/3 * math.pi * pow(r_d, 3) # Volume of particles 
 m_p = rho / V                   # Mass of particles 
-print(V)
+
 # Generating random particle in a plot
 x = [random.uniform(-100, 100) for n in range(50)]
 y = [random.uniform(-100, 100) for n in range(50)]
@@ -43,48 +42,48 @@ for j in range(len(x)):
    vy = -g_g 
    v_y.append(vy)
 
-# Set the time step (just selected as 0.01 s but when changed the plot changes)
-dt = 1000
+# Seting the time step 
+dt = 0.1
 
-# Set the initial momentum to zero
+# Seting the initial momentum to zero
 total_momentum = 0
 
-# Calculate the momentum of each particle and add it to the total momentum
+# Calculating the momentum of each particle and add it to the total momentum
 momenta = []
 for j in range(numparticles):
     momentum = m_p * v_x[j]
     momenta.append(momentum)
     total_momentum += momentum
 
-# Record the time
+# Recording the time
 time = 0
 
 # Momentum over time
 times = [0] # initial time
 momentum_values = [total_momentum]
 for i in range(100):
-    # Update the positions and velocities
+    # Updating the positions and velocities
     for j in range(numparticles):
         x[j] += v_x[j] * dt
         y[j] += v_y[j] * dt
 
-    # Calculate new momentum and add it to the total momentum
+    # Calculating new momentum and add it to the total momentum
     new_momenta = []
     for position in x:
         momentum = random.uniform(-1, 1)
         new_momenta.append(momentum)
         total_momentum += momentum
 
-    # Update the momentum of each particle to ensure conservation of momentum
+    # Updating the momentum of each particle to ensure conservation of momentum
     average_momentum = total_momentum / numparticles
     for j in range(numparticles):
         momenta[j] += average_momentum - new_momenta[j]
 
-    # Update the time
+    # Updating the time
     time += dt
     times.append(time)
 
-    # Update the momentum_values list
+    # Updating the momentum_values list
     momentum_values.append(total_momentum)
 
 # Plotting the graph 
